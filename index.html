@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>تسجيل الدخول / إنشاء حساب</title>
+  <title>medo-learn</title>
   <style>
     :root{
       --bg:#0f172a;
@@ -93,16 +93,16 @@
     <section class="hero">
       <div>
         <div class="badge">🔥 Firebase Auth + Firestore</div>
-        <h1>أنشئ حسابك وادخل مباشرة</h1>
+        <h1>أنشئ حسابك وافهم</h1>
         <p class="subtitle">
-          الصفحة فيها زرين واضحين: <b>تسجيل الدخول</b> و <b>إنشاء حساب</b>.
-          عند اختيار إنشاء حساب ستظهر حقول الاسم والعمر والجنس فورًا.
+    استمتع بملخصات عاليه الدقه والفهم: <b>تسجيل الدخول</b> و <b>إنشاء حساب</b>.
+        
         </p>
       </div>
       <div class="stats">
         <div class="stat"><strong>100</strong><span>كوينز عند التسجيل</span></div>
         <div class="stat"><strong>Auth</strong><span>Email / Password</span></div>
-        <div class="stat"><strong>DB</strong><span>Firestore</span></div>
+        <div class="stat"><strong>DB</strong><span>تعليم افضل</span></div>
       </div>
     </section>
 
@@ -151,7 +151,7 @@
       </form>
 
       <p class="hint">لو ضغطت على إنشاء حساب وما ظهر شيء، فهذه النسخة تتجنب المشكلة وتفعل الحقول مباشرة بدون انتظار أي شيء آخر.</p>
-      <p class="note">فعّل Email/Password من Firebase Authentication، وشغّل الصفحة عبر Live Server أو localhost.</p>
+      <p class="note">ملخصات مش للحفظ           .</p>
     </section>
   </main>
 
@@ -251,7 +251,7 @@
         await db.collection("users").doc(cred.user.uid).set(profile, { merge: true });
         saveLocalProfile(profile);
 
-        showMessage("تم إنشاء الحساب بنجاح، سيتم التحويل الآن...", "ok");
+        showMessage("تم إنشاء الحساب بنجاح،   ...", "ok");
         setTimeout(() => window.location.href = "p2.html", 800);
       }
 
@@ -284,7 +284,7 @@
         }
 
         saveLocalProfile(profile);
-        showMessage("تم تسجيل الدخول بنجاح، سيتم التحويل الآن...", "ok");
+        showMessage("تم تسجيل الدخول بنجاح،   ...", "ok");
         setTimeout(() => window.location.href = "p2.html", 700);
       }
 
@@ -294,7 +294,7 @@
       authForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         try {
-          if (!app) throw new Error("Firebase لم يبدأ. تأكد من تشغيل الصفحة عبر localhost.");
+          if (!app) throw new Error("  .      جاري التحميل.");
           setLoading(true);
           showMessage("");
 
@@ -311,7 +311,7 @@
           if (err?.code === "auth/user-not-found") msg = "الحساب غير موجود.";
           if (err?.code === "auth/wrong-password") msg = "كلمة المرور غير صحيحة.";
           if (err?.code === "permission-denied") msg = "Firestore Rules تمنع الكتابة. عدّل القواعد.";
-          if (location.protocol === "file:") msg = "افتح الصفحة عبر localhost / Live Server وليس file://";
+          if (location.protocol === "file:") msg = "    /    ";
           showMessage(msg, "err");
           console.error(err);
         } finally {
@@ -321,7 +321,7 @@
 
       try {
         if (location.protocol === "file:") {
-          showMessage("افتح الصفحة عبر localhost / Live Server وليس file://", "err");
+          showMessage("    /     "err");
         }
         app = firebase.initializeApp(firebaseConfig);
         auth = firebase.auth();
