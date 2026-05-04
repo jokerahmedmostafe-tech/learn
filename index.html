@@ -5,207 +5,104 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>تسجيل الدخول / إنشاء حساب</title>
   <style>
-    :root {
-      --bg: #0f172a;
-      --card: rgba(15, 23, 42, 0.88);
-      --line: rgba(148, 163, 184, 0.18);
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent2: #22c55e;
-      --danger: #ef4444;
-      --shadow: 0 24px 70px rgba(0,0,0,.35);
-      --radius: 22px;
+    :root{
+      --bg:#0f172a;
+      --card:rgba(15,23,42,.92);
+      --line:rgba(148,163,184,.18);
+      --text:#e2e8f0;
+      --muted:#94a3b8;
+      --accent:#38bdf8;
+      --good:#86efac;
+      --bad:#fca5a5;
+      --shadow:0 24px 70px rgba(0,0,0,.35);
+      --radius:22px;
     }
-
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:
         radial-gradient(circle at top, rgba(56,189,248,.25), transparent 35%),
         radial-gradient(circle at bottom left, rgba(34,197,94,.18), transparent 30%),
         var(--bg);
-      color: var(--text);
-      display: grid;
-      place-items: center;
-      padding: 24px;
+      color:var(--text);
+      display:grid; place-items:center; padding:24px;
     }
-
-    .wrap {
-      width: min(980px, 100%);
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 20px;
-      align-items: stretch;
+    .wrap{
+      width:min(1000px,100%);
+      display:grid; grid-template-columns:1.05fr .95fr; gap:20px;
     }
-
-    .hero, .card {
-      border: 1px solid var(--line);
-      background: var(--card);
-      backdrop-filter: blur(18px);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
+    .hero,.card{
+      border:1px solid var(--line);
+      background:var(--card);
+      backdrop-filter:blur(18px);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
     }
-
-    .hero {
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 24px;
+    .hero{padding:32px; display:flex; flex-direction:column; justify-content:space-between; gap:24px}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border:1px solid var(--line); border-radius:999px;
+      width:fit-content; color:#cbd5e1; font-size:14px; background:rgba(255,255,255,.03);
     }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      width: fit-content;
-      color: #cbd5e1;
-      font-size: 14px;
-      background: rgba(255,255,255,0.03);
+    h1{font-size:clamp(30px,4vw,52px); line-height:1.05; margin:0}
+    .subtitle{color:var(--muted); font-size:16px; line-height:1.9; max-width:58ch}
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    .stat{padding:16px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.03)}
+    .stat strong{display:block; font-size:22px; margin-bottom:6px}
+    .card{padding:28px}
+    .tabs{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px}
+    .tab{
+      border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--text);
+      border-radius:14px; padding:14px; cursor:pointer; font-size:15px; transition:.2s ease;
     }
-
-    .title {
-      font-size: clamp(30px, 4vw, 52px);
-      line-height: 1.05;
-      margin: 0;
+    .tab.active{background:rgba(56,189,248,.18); border-color:rgba(56,189,248,.4)}
+    form{display:grid; gap:14px}
+    .field{display:grid; gap:8px}
+    label{font-size:14px; color:#cbd5e1}
+    input,select{
+      width:100%; padding:14px 15px; border-radius:14px; border:1px solid var(--line);
+      background:rgba(15,23,42,.72); color:var(--text); outline:none; font-size:15px;
     }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.8;
-      margin: 0;
-      max-width: 54ch;
+    input:focus,select:focus{border-color:rgba(56,189,248,.7)}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .btn{
+      border:none; border-radius:14px; padding:14px 16px;
+      background:linear-gradient(135deg, var(--accent), #60a5fa);
+      color:#04111d; font-weight:700; cursor:pointer; font-size:16px;
+      transition:transform .15s ease, opacity .15s ease;
     }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+    .btn:hover{transform:translateY(-1px)}
+    .btn:disabled{opacity:.65; cursor:not-allowed}
+    .msg{min-height:24px; font-size:14px; line-height:1.8; color:var(--muted)}
+    .msg.ok{color:var(--good)}
+    .msg.err{color:var(--bad)}
+    .hint,.note{font-size:14px; line-height:1.8; color:var(--muted)}
+    .note{font-size:12px}
+    .hidden{display:none !important}
+    @media (max-width: 880px){
+      .wrap{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
     }
-
-    .stat {
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.03);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 22px;
-      margin-bottom: 6px;
-    }
-
-    .card {
-      padding: 28px;
-    }
-
-    .tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .tab {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      border-radius: 14px;
-      padding: 14px;
-      cursor: pointer;
-      font-size: 15px;
-      transition: 0.2s ease;
-    }
-    .tab.active {
-      background: rgba(56,189,248,.18);
-      border-color: rgba(56,189,248,.4);
-    }
-
-    form { display: grid; gap: 14px; }
-    .field { display: grid; gap: 8px; }
-    label { font-size: 14px; color: #cbd5e1; }
-    input, select {
-      width: 100%;
-      padding: 14px 15px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(15,23,42,.72);
-      color: var(--text);
-      outline: none;
-      font-size: 15px;
-    }
-    input:focus, select:focus { border-color: rgba(56,189,248,.7); }
-
-    .grid2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 14px;
-      padding: 14px 16px;
-      background: linear-gradient(135deg, var(--accent), #60a5fa);
-      color: #04111d;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 16px;
-      transition: transform .15s ease, opacity .15s ease;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn:disabled { opacity: .7; cursor: not-allowed; }
-
-    .hint, .msg {
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-    .msg { min-height: 24px; }
-    .msg.ok { color: #86efac; }
-    .msg.err { color: #fca5a5; }
-
-    .footer-note {
-      margin-top: 6px;
-      font-size: 12px;
-      color: #94a3b8;
-      line-height: 1.7;
-    }
-
-    .hidden { display: none !important; }
-
-    @media (max-width: 880px) {
-      .wrap { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: 1fr; }
-      .grid2 { grid-template-columns: 1fr; }
-    }
+    code{background:rgba(255,255,255,.06); padding:2px 6px; border-radius:8px}
   </style>
 </head>
 <body>
   <main class="wrap">
     <section class="hero">
       <div>
-        <div class="badge">🔥 نظام تسجيل + Firebase</div>
-        <h1 class="title">أنشئ حسابك وابدأ فورًا</h1>
+        <div class="badge">🔥 Firebase Auth + Firestore</div>
+        <h1>أنشئ حسابك وادخل مباشرة</h1>
         <p class="subtitle">
-          هذه الصفحة تعمل بتسجيل الدخول عبر البريد الإلكتروني وكلمة المرور، مع حفظ ملف المستخدم داخل Firebase
-          ومنح 100 كوينز تلقائيًا بعد إنشاء الحساب، ثم الانتقال إلى <b>p2.html</b>.
+          الصفحة فيها زرين واضحين: <b>تسجيل الدخول</b> و <b>إنشاء حساب</b>.
+          عند اختيار إنشاء حساب ستظهر حقول الاسم والعمر والجنس فورًا.
         </p>
       </div>
-
       <div class="stats">
         <div class="stat"><strong>100</strong><span>كوينز عند التسجيل</span></div>
-        <div class="stat"><strong>Firebase</strong><span>Auth + Firestore</span></div>
-        <div class="stat"><strong>p2.html</strong><span>بعد النجاح مباشرة</span></div>
+        <div class="stat"><strong>Auth</strong><span>Email / Password</span></div>
+        <div class="stat"><strong>DB</strong><span>Firestore</span></div>
       </div>
     </section>
 
@@ -253,178 +150,189 @@
         <div id="message" class="msg"></div>
       </form>
 
-      <p class="hint">
-        ملاحظة: هذا المثال يحفظ بيانات الملف الشخصي داخل Firebase فقط. لا أنصح بإرسال كلمات المرور أو بيانات المستخدم إلى خدمات خارجية مثل تيليجرام.
-      </p>
-      <p class="footer-note">
-        قبل التشغيل: ضع إعدادات Firebase الخاصة بمشروعك في المكان المخصص بالأسفل، وفعّل Email/Password Authentication، وأنشئ قاعدة Firestore.
-      </p>
+      <p class="hint">لو ضغطت على إنشاء حساب وما ظهر شيء، فهذه النسخة تتجنب المشكلة وتفعل الحقول مباشرة بدون انتظار أي شيء آخر.</p>
+      <p class="note">فعّل Email/Password من Firebase Authentication، وشغّل الصفحة عبر Live Server أو localhost.</p>
     </section>
   </main>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-    import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 
-    // TODO: استبدل هذه القيم ببيانات مشروع Firebase الخاص بك.
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const firebaseConfig = {
+        apiKey: "AIzaSyDKRvgs4fCoyCIOUNgSCgUFkPEvFaeH5rQ",
+        authDomain: "learning-a6476.firebaseapp.com",
+        projectId: "learning-a6476",
+        storageBucket: "learning-a6476.firebasestorage.app",
+        messagingSenderId: "950361419682",
+        appId: "1:950361419682:web:4fb2f4c0f4ec0a3ef5ccfb",
+        measurementId: "G-6F4M50ZNY4"
+      };
 
-    const TELEGRAM_ENDPOINT = '/api/telegram-register'; // هذا endpoint يجب أن يكون في السيرفر
+      const loginTab = document.getElementById("loginTab");
+      const registerTab = document.getElementById("registerTab");
+      const profileFields = document.getElementById("profileFields");
+      const authForm = document.getElementById("authForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const messageEl = document.getElementById("message");
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+      const emailEl = document.getElementById("email");
+      const passwordEl = document.getElementById("password");
+      const nameEl = document.getElementById("name");
+      const ageEl = document.getElementById("age");
+      const genderEl = document.getElementById("gender");
 
-    const loginTab = document.getElementById('loginTab');
-    const registerTab = document.getElementById('registerTab');
-    const authForm = document.getElementById('authForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const message = document.getElementById('message');
-    const profileFields = document.getElementById('profileFields');
+      let mode = "login";
+      let app, auth, db;
 
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
-    const name = document.getElementById('name');
-    const age = document.getElementById('age');
-    const gender = document.getElementById('gender');
-
-    let mode = 'login';
-
-    function setMode(nextMode) {
-      mode = nextMode;
-      const isRegister = mode === 'register';
-      loginTab.classList.toggle('active', !isRegister);
-      registerTab.classList.toggle('active', isRegister);
-      profileFields.classList.toggle('hidden', !isRegister);
-      submitBtn.textContent = isRegister ? 'إنشاء حساب' : 'تسجيل الدخول';
-      message.textContent = '';
-      message.className = 'msg';
-
-      name.required = isRegister;
-      age.required = isRegister;
-      gender.required = isRegister;
-    }
-
-    loginTab.addEventListener('click', () => setMode('login'));
-    registerTab.addEventListener('click', () => setMode('register'));
-
-    function setLoading(isLoading) {
-      submitBtn.disabled = isLoading;
-      submitBtn.textContent = isLoading
-        ? (mode === 'register' ? 'جاري إنشاء الحساب...' : 'جاري تسجيل الدخول...')
-        : (mode === 'register' ? 'إنشاء حساب' : 'تسجيل الدخول');
-    }
-
-    function showMsg(text, type = '') {
-      message.textContent = text;
-      message.className = `msg ${type}`.trim();
-    }
-
-    async function createProfile(uid, profile) {
-      await setDoc(doc(db, 'users', uid), {
-        uid,
-        ...profile,
-        coins: 100,
-        createdAt: serverTimestamp(),
-        lastLoginAt: serverTimestamp()
-      }, { merge: true });
-    }
-
-    async function syncLogin(uid) {
-      await setDoc(doc(db, 'users', uid), {
-        lastLoginAt: serverTimestamp()
-      }, { merge: true });
-    }
-
-    async function notifyTelegram(payload) {
-      try {
-        await fetch(TELEGRAM_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      } catch (_) {
-        // لا نوقف تسجيل المستخدم إذا فشل الإشعار
+      function showMessage(text, type = "") {
+        messageEl.textContent = text || "";
+        messageEl.className = "msg " + type;
       }
-    }, { merge: true });
-    }
 
-    authForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      setLoading(true);
+      function setLoading(isLoading) {
+        submitBtn.disabled = isLoading;
+        submitBtn.textContent = isLoading
+          ? (mode === "register" ? "جاري إنشاء الحساب..." : "جاري تسجيل الدخول...")
+          : (mode === "register" ? "إنشاء حساب" : "تسجيل الدخول");
+      }
+
+      function setMode(nextMode) {
+        mode = nextMode;
+        const isRegister = nextMode === "register";
+        loginTab.classList.toggle("active", !isRegister);
+        registerTab.classList.toggle("active", isRegister);
+        profileFields.classList.toggle("hidden", !isRegister);
+
+        nameEl.required = isRegister;
+        ageEl.required = isRegister;
+        genderEl.required = isRegister;
+
+        submitBtn.textContent = isRegister ? "إنشاء حساب" : "تسجيل الدخول";
+        showMessage("");
+
+        if (isRegister) {
+          setTimeout(() => nameEl.focus(), 0);
+        } else {
+          setTimeout(() => emailEl.focus(), 0);
+        }
+      }
+
+      function saveLocalProfile(profile) {
+        localStorage.setItem("userProfile", JSON.stringify(profile));
+      }
+
+      async function registerUser() {
+        const mail = emailEl.value.trim();
+        const pass = passwordEl.value;
+        const fullName = nameEl.value.trim();
+        const userAge = Number(ageEl.value);
+        const userGender = genderEl.value;
+
+        if (!mail || !pass || !fullName || !userAge || !userGender) {
+          throw new Error("املأ كل الحقول المطلوبة.");
+        }
+
+        const cred = await auth.createUserWithEmailAndPassword(mail, pass);
+
+        const profile = {
+          uid: cred.user.uid,
+          name: fullName,
+          age: userAge,
+          gender: userGender,
+          email: mail,
+          coins: 100,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        await db.collection("users").doc(cred.user.uid).set(profile, { merge: true });
+        saveLocalProfile(profile);
+
+        showMessage("تم إنشاء الحساب بنجاح، سيتم التحويل الآن...", "ok");
+        setTimeout(() => window.location.href = "p2.html", 800);
+      }
+
+      async function loginUser() {
+        const mail = emailEl.value.trim();
+        const pass = passwordEl.value;
+
+        if (!mail || !pass) {
+          throw new Error("اكتب البريد الإلكتروني وكلمة المرور.");
+        }
+
+        const cred = await auth.signInWithEmailAndPassword(mail, pass);
+        const ref = db.collection("users").doc(cred.user.uid);
+        const snap = await ref.get();
+
+        let profile;
+        if (snap.exists) {
+          profile = snap.data() || {};
+          await ref.set({
+            lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+        } else {
+          profile = { uid: cred.user.uid, email: mail, coins: 0 };
+          await ref.set({
+            uid: cred.user.uid,
+            email: mail,
+            coins: 0,
+            lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+        }
+
+        saveLocalProfile(profile);
+        showMessage("تم تسجيل الدخول بنجاح، سيتم التحويل الآن...", "ok");
+        setTimeout(() => window.location.href = "p2.html", 700);
+      }
+
+      loginTab.addEventListener("click", () => setMode("login"));
+      registerTab.addEventListener("click", () => setMode("register"));
+
+      authForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        try {
+          if (!app) throw new Error("Firebase لم يبدأ. تأكد من تشغيل الصفحة عبر localhost.");
+          setLoading(true);
+          showMessage("");
+
+          if (mode === "register") {
+            await registerUser();
+          } else {
+            await loginUser();
+          }
+        } catch (err) {
+          let msg = err?.message || "حدث خطأ غير متوقع.";
+          if (err?.code === "auth/email-already-in-use") msg = "هذا البريد مستخدم بالفعل.";
+          if (err?.code === "auth/invalid-email") msg = "صيغة البريد غير صحيحة.";
+          if (err?.code === "auth/weak-password") msg = "كلمة المرور ضعيفة. استخدم 6 أحرف أو أكثر.";
+          if (err?.code === "auth/user-not-found") msg = "الحساب غير موجود.";
+          if (err?.code === "auth/wrong-password") msg = "كلمة المرور غير صحيحة.";
+          if (err?.code === "permission-denied") msg = "Firestore Rules تمنع الكتابة. عدّل القواعد.";
+          if (location.protocol === "file:") msg = "افتح الصفحة عبر localhost / Live Server وليس file://";
+          showMessage(msg, "err");
+          console.error(err);
+        } finally {
+          setLoading(false);
+        }
+      });
 
       try {
-        const mail = email.value.trim();
-        const pass = password.value;
-
-        if (mode === 'register') {
-          const fullName = name.value.trim();
-          const userAge = Number(age.value);
-          const userGender = gender.value;
-
-          if (!fullName || !userAge || !userGender) {
-            throw new Error('املأ الاسم والعمر والجنس قبل إنشاء الحساب.');
-          }
-
-          const cred = await createUserWithEmailAndPassword(auth, mail, pass);
-          await createProfile(cred.user.uid, {
-            name: fullName,
-            age: userAge,
-            gender: userGender,
-            email: mail
-          });
-
-          await notifyTelegram({
-            event: 'register',
-            uid: cred.user.uid,
-            name: fullName,
-            age: userAge,
-            gender: userGender,
-            email: mail,
-            coins: 100
-          });
-
-          showMsg('تم إنشاء الحساب بنجاح، سيتم تحويلك الآن...', 'ok');
-          setTimeout(() => {
-            window.location.href = 'p2.html';
-          }, 900);
-          return;
+        if (location.protocol === "file:") {
+          showMessage("افتح الصفحة عبر localhost / Live Server وليس file://", "err");
         }
-
-        const cred = await signInWithEmailAndPassword(auth, mail, pass);
-        await syncLogin(cred.user.uid);
-
-        // مثال آمن: قراءة بيانات الملف الشخصي دون إرسالها لخارج Firebase.
-        const snap = await getDoc(doc(db, 'users', cred.user.uid));
-        if (!snap.exists()) {
-          await createProfile(cred.user.uid, {
-            name: '',
-            age: null,
-            gender: '',
-            email: mail
-          });
-        }
-
-        showMsg('تم تسجيل الدخول بنجاح، سيتم التحويل الآن...', 'ok');
-        setTimeout(() => {
-          window.location.href = 'p2.html';
-        }, 700);
+        app = firebase.initializeApp(firebaseConfig);
+        auth = firebase.auth();
+        db = firebase.firestore();
+        auth.useDeviceLanguage();
+        setMode("login");
       } catch (err) {
-        showMsg(err?.message || 'حدث خطأ غير متوقع.', 'err');
-      } finally {
-        setLoading(false);
+        showMessage("فشل تشغيل Firebase: " + (err?.message || "خطأ غير معروف"), "err");
+        console.error(err);
       }
     });
-
-    setMode('login');
   </script>
 </body>
 </html>
