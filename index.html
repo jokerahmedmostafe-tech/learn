@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسجيل الدخول / إنشاء حساب</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: rgba(15, 23, 42, 0.88);
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent2: #22c55e;
+      --danger: #ef4444;
+      --shadow: 0 24px 70px rgba(0,0,0,.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(56,189,248,.25), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(34,197,94,.18), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .wrap {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .hero, .card {
+      border: 1px solid var(--line);
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      width: fit-content;
+      color: #cbd5e1;
+      font-size: 14px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .title {
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      margin: 0;
+      max-width: 54ch;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .card {
+      padding: 28px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 14px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.2s ease;
+    }
+    .tab.active {
+      background: rgba(56,189,248,.18);
+      border-color: rgba(56,189,248,.4);
+    }
+
+    form { display: grid; gap: 14px; }
+    .field { display: grid; gap: 8px; }
+    label { font-size: 14px; color: #cbd5e1; }
+    input, select {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(15,23,42,.72);
+      color: var(--text);
+      outline: none;
+      font-size: 15px;
+    }
+    input:focus, select:focus { border-color: rgba(56,189,248,.7); }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, var(--accent), #60a5fa);
+      color: #04111d;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform .15s ease, opacity .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { opacity: .7; cursor: not-allowed; }
+
+    .hint, .msg {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .msg { min-height: 24px; }
+    .msg.ok { color: #86efac; }
+    .msg.err { color: #fca5a5; }
+
+    .footer-note {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 880px) {
+      .wrap { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .grid2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="badge">🔥 نظام تسجيل + Firebase</div>
+        <h1 class="title">أنشئ حسابك وابدأ فورًا</h1>
+        <p class="subtitle">
+          هذه الصفحة تعمل بتسجيل الدخول عبر البريد الإلكتروني وكلمة المرور، مع حفظ ملف المستخدم داخل Firebase
+          ومنح 100 كوينز تلقائيًا بعد إنشاء الحساب، ثم الانتقال إلى <b>p2.html</b>.
+        </p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><strong>100</strong><span>كوينز عند التسجيل</span></div>
+        <div class="stat"><strong>Firebase</strong><span>Auth + Firestore</span></div>
+        <div class="stat"><strong>p2.html</strong><span>بعد النجاح مباشرة</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="tabs">
+        <button id="loginTab" class="tab active" type="button">تسجيل الدخول</button>
+        <button id="registerTab" class="tab" type="button">إنشاء حساب</button>
+      </div>
+
+      <form id="authForm" autocomplete="on">
+        <div class="field">
+          <label for="email">البريد الإلكتروني</label>
+          <input id="email" type="email" placeholder="name@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="password">كلمة المرور</label>
+          <input id="password" type="password" placeholder="••••••••" minlength="6" required />
+        </div>
+
+        <div id="profileFields" class="hidden">
+          <div class="grid2">
+            <div class="field">
+              <label for="name">الاسم</label>
+              <input id="name" type="text" placeholder="اسمك الكامل" />
+            </div>
+            <div class="field">
+              <label for="age">العمر</label>
+              <input id="age" type="number" min="1" max="120" placeholder="مثال: 18" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="gender">الجنس</label>
+            <select id="gender">
+              <option value="">اختر الجنس</option>
+              <option value="male">ذكر</option>
+              <option value="female">أنثى</option>
+              <option value="other">أخرى</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="submitBtn" class="btn" type="submit">تسجيل الدخول</button>
+        <div id="message" class="msg"></div>
+      </form>
+
+      <p class="hint">
+        ملاحظة: هذا المثال يحفظ بيانات الملف الشخصي داخل Firebase فقط. لا أنصح بإرسال كلمات المرور أو بيانات المستخدم إلى خدمات خارجية مثل تيليجرام.
+      </p>
+      <p class="footer-note">
+        قبل التشغيل: ضع إعدادات Firebase الخاصة بمشروعك في المكان المخصص بالأسفل، وفعّل Email/Password Authentication، وأنشئ قاعدة Firestore.
+      </p>
+    </section>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    // TODO: استبدل هذه القيم ببيانات مشروع Firebase الخاص بك.
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const TELEGRAM_ENDPOINT = '/api/telegram-register'; // هذا endpoint يجب أن يكون في السيرفر
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const loginTab = document.getElementById('loginTab');
+    const registerTab = document.getElementById('registerTab');
+    const authForm = document.getElementById('authForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const message = document.getElementById('message');
+    const profileFields = document.getElementById('profileFields');
+
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const name = document.getElementById('name');
+    const age = document.getElementById('age');
+    const gender = document.getElementById('gender');
+
+    let mode = 'login';
+
+    function setMode(nextMode) {
+      mode = nextMode;
+      const isRegister = mode === 'register';
+      loginTab.classList.toggle('active', !isRegister);
+      registerTab.classList.toggle('active', isRegister);
+      profileFields.classList.toggle('hidden', !isRegister);
+      submitBtn.textContent = isRegister ? 'إنشاء حساب' : 'تسجيل الدخول';
+      message.textContent = '';
+      message.className = 'msg';
+
+      name.required = isRegister;
+      age.required = isRegister;
+      gender.required = isRegister;
+    }
+
+    loginTab.addEventListener('click', () => setMode('login'));
+    registerTab.addEventListener('click', () => setMode('register'));
+
+    function setLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      submitBtn.textContent = isLoading
+        ? (mode === 'register' ? 'جاري إنشاء الحساب...' : 'جاري تسجيل الدخول...')
+        : (mode === 'register' ? 'إنشاء حساب' : 'تسجيل الدخول');
+    }
+
+    function showMsg(text, type = '') {
+      message.textContent = text;
+      message.className = `msg ${type}`.trim();
+    }
+
+    async function createProfile(uid, profile) {
+      await setDoc(doc(db, 'users', uid), {
+        uid,
+        ...profile,
+        coins: 100,
+        createdAt: serverTimestamp(),
+        lastLoginAt: serverTimestamp()
+      }, { merge: true });
+    }
+
+    async function syncLogin(uid) {
+      await setDoc(doc(db, 'users', uid), {
+        lastLoginAt: serverTimestamp()
+      }, { merge: true });
+    }
+
+    async function notifyTelegram(payload) {
+      try {
+        await fetch(TELEGRAM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (_) {
+        // لا نوقف تسجيل المستخدم إذا فشل الإشعار
+      }
+    }, { merge: true });
+    }
+
+    authForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setLoading(true);
+
+      try {
+        const mail = email.value.trim();
+        const pass = password.value;
+
+        if (mode === 'register') {
+          const fullName = name.value.trim();
+          const userAge = Number(age.value);
+          const userGender = gender.value;
+
+          if (!fullName || !userAge || !userGender) {
+            throw new Error('املأ الاسم والعمر والجنس قبل إنشاء الحساب.');
+          }
+
+          const cred = await createUserWithEmailAndPassword(auth, mail, pass);
+          await createProfile(cred.user.uid, {
+            name: fullName,
+            age: userAge,
+            gender: userGender,
+            email: mail
+          });
+
+          await notifyTelegram({
+            event: 'register',
+            uid: cred.user.uid,
+            name: fullName,
+            age: userAge,
+            gender: userGender,
+            email: mail,
+            coins: 100
+          });
+
+          showMsg('تم إنشاء الحساب بنجاح، سيتم تحويلك الآن...', 'ok');
+          setTimeout(() => {
+            window.location.href = 'p2.html';
+          }, 900);
+          return;
+        }
+
+        const cred = await signInWithEmailAndPassword(auth, mail, pass);
+        await syncLogin(cred.user.uid);
+
+        // مثال آمن: قراءة بيانات الملف الشخصي دون إرسالها لخارج Firebase.
+        const snap = await getDoc(doc(db, 'users', cred.user.uid));
+        if (!snap.exists()) {
+          await createProfile(cred.user.uid, {
+            name: '',
+            age: null,
+            gender: '',
+            email: mail
+          });
+        }
+
+        showMsg('تم تسجيل الدخول بنجاح، سيتم التحويل الآن...', 'ok');
+        setTimeout(() => {
+          window.location.href = 'p2.html';
+        }, 700);
+      } catch (err) {
+        showMsg(err?.message || 'حدث خطأ غير متوقع.', 'err');
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    setMode('login');
+  </script>
+</body>
+</html>
