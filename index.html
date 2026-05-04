@@ -19,17 +19,23 @@
     }
     *{box-sizing:border-box}
     body{
-      margin:0; min-height:100vh; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      margin:0;
+      min-height:100vh;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:
         radial-gradient(circle at top, rgba(56,189,248,.25), transparent 35%),
         radial-gradient(circle at bottom left, rgba(34,197,94,.18), transparent 30%),
         var(--bg);
       color:var(--text);
-      display:grid; place-items:center; padding:24px;
+      display:grid;
+      place-items:center;
+      padding:24px;
     }
     .wrap{
-      width:min(1000px,100%);
-      display:grid; grid-template-columns:1.05fr .95fr; gap:20px;
+      width:min(1100px,100%);
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:20px;
     }
     .hero,.card{
       border:1px solid var(--line);
@@ -39,47 +45,205 @@
       box-shadow:var(--shadow);
       overflow:hidden;
     }
-    .hero{padding:32px; display:flex; flex-direction:column; justify-content:space-between; gap:24px}
+    .hero{
+      padding:32px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:24px;
+    }
     .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px; border:1px solid var(--line); border-radius:999px;
-      width:fit-content; color:#cbd5e1; font-size:14px; background:rgba(255,255,255,.03);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      width:fit-content;
+      color:#cbd5e1;
+      font-size:14px;
+      background:rgba(255,255,255,.03);
     }
     h1{font-size:clamp(30px,4vw,52px); line-height:1.05; margin:0}
-    .subtitle{color:var(--muted); font-size:16px; line-height:1.9; max-width:58ch}
-    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
-    .stat{padding:16px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.03)}
-    .stat strong{display:block; font-size:22px; margin-bottom:6px}
-    .card{padding:28px}
-    .tabs{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px}
-    .tab{
-      border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--text);
-      border-radius:14px; padding:14px; cursor:pointer; font-size:15px; transition:.2s ease;
+    .subtitle{
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.9;
+      max-width:58ch;
+      margin:14px 0 0;
     }
-    .tab.active{background:rgba(56,189,248,.18); border-color:rgba(56,189,248,.4)}
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+    .stat{
+      padding:16px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+    }
+    .stat strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:6px;
+    }
+    .card{padding:28px}
+    .tabs{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-bottom:20px;
+    }
+    .tab{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      border-radius:14px;
+      padding:14px;
+      cursor:pointer;
+      font-size:15px;
+      transition:.2s ease;
+    }
+    .tab.active{
+      background:rgba(56,189,248,.18);
+      border-color:rgba(56,189,248,.4);
+    }
     form{display:grid; gap:14px}
     .field{display:grid; gap:8px}
     label{font-size:14px; color:#cbd5e1}
     input,select{
-      width:100%; padding:14px 15px; border-radius:14px; border:1px solid var(--line);
-      background:rgba(15,23,42,.72); color:var(--text); outline:none; font-size:15px;
+      width:100%;
+      padding:14px 15px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.72);
+      color:var(--text);
+      outline:none;
+      font-size:15px;
     }
     input:focus,select:focus{border-color:rgba(56,189,248,.7)}
     .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
     .btn{
-      border:none; border-radius:14px; padding:14px 16px;
+      border:none;
+      border-radius:14px;
+      padding:14px 16px;
       background:linear-gradient(135deg, var(--accent), #60a5fa);
-      color:#04111d; font-weight:700; cursor:pointer; font-size:16px;
+      color:#04111d;
+      font-weight:700;
+      cursor:pointer;
+      font-size:16px;
       transition:transform .15s ease, opacity .15s ease;
     }
     .btn:hover{transform:translateY(-1px)}
     .btn:disabled{opacity:.65; cursor:not-allowed}
-    .msg{min-height:24px; font-size:14px; line-height:1.8; color:var(--muted)}
+    .msg{
+      min-height:24px;
+      font-size:14px;
+      line-height:1.8;
+      color:var(--muted);
+    }
     .msg.ok{color:var(--good)}
     .msg.err{color:var(--bad)}
-    .hint,.note{font-size:14px; line-height:1.8; color:var(--muted)}
+    .hint,.note{
+      font-size:14px;
+      line-height:1.8;
+      color:var(--muted);
+      margin:14px 0 0;
+    }
     .note{font-size:12px}
     .hidden{display:none !important}
+    .dashboard-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .wallet{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .wallet strong{font-size:26px}
+    .wallet span{color:var(--muted); font-size:13px}
+    .ghost{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      border-radius:14px;
+      padding:12px 14px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .service-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+    .service-btn{
+      text-align:right;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      color:var(--text);
+      border-radius:18px;
+      padding:16px;
+      cursor:pointer;
+      transition:.2s ease;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .service-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(56,189,248,.45);
+    }
+    .service-btn .meta{
+      display:grid;
+      gap:4px;
+    }
+    .service-btn .meta strong{font-size:16px}
+    .service-btn .meta span{font-size:13px; color:var(--muted)}
+    .price{
+      font-weight:800;
+      color:#a7f3d0;
+      white-space:nowrap;
+    }
+    .summary-panel{
+      margin-top:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:20px;
+      padding:18px;
+    }
+    .summary-panel h3{
+      margin:0 0 10px;
+      font-size:22px;
+    }
+    .summary-panel p{
+      margin:0;
+      color:#dbeafe;
+      line-height:1.9;
+      font-size:15px;
+    }
+    .summary-panel ul{
+      margin:12px 0 0;
+      padding:0 18px 0 0;
+      color:var(--text);
+      line-height:1.9;
+    }
+    .small{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:10px;
+    }
     @media (max-width: 880px){
       .wrap{grid-template-columns:1fr}
       .stats{grid-template-columns:1fr}
@@ -95,14 +259,13 @@
         <div class="badge">🔥 Firebase Auth + Firestore</div>
         <h1>أنشئ حسابك وافهم</h1>
         <p class="subtitle">
-    استمتع بملخصات عاليه الدقه والفهم: <b>تسجيل الدخول</b> و <b>إنشاء حساب</b>.
-        
+          استمتع بتجربة تسجيل دخول وإنشاء حساب بشكل سريع، وبعدها تدخل مباشرة على صفحة الملخصات بدون تحويلات مزعجة.
         </p>
       </div>
       <div class="stats">
         <div class="stat"><strong>100</strong><span>كوينز عند التسجيل</span></div>
         <div class="stat"><strong>Auth</strong><span>Email / Password</span></div>
-        <div class="stat"><strong>DB</strong><span>تعليم افضل</span></div>
+        <div class="stat"><strong>DB</strong><span>Firestore</span></div>
       </div>
     </section>
 
@@ -150,8 +313,53 @@
         <div id="message" class="msg"></div>
       </form>
 
-      <p class="hint">لو ضغطت على إنشاء حساب وما ظهر شيء، فهذه النسخة تتجنب المشكلة وتفعل الحقول مباشرة بدون انتظار أي شيء آخر.</p>
-      <p class="note">ملخصات مش للحفظ           .</p>
+      <p class="hint">لما تضغط على إنشاء حساب ستظهر الحقول مباشرة. لو كانت لا تظهر عندك قبل ذلك، فالمشكلة كانت من خطأ JavaScript في النسخة القديمة.</p>
+      <p class="note">ملحوظة: لو فتحت الملف مباشرة على <code>file://</code> قد تواجه مشكلة مع Firebase، والأفضل تشغيله عبر Live Server أو استضافة.</p>
+    </section>
+
+    <section id="dashboardCard" class="card hidden" style="grid-column:1 / -1;">
+      <div class="dashboard-top">
+        <div class="wallet">
+          <div>
+            <strong id="coinsCount">0</strong>
+            <div><span>كوينز متاحة</span></div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button id="backToAuthBtn" class="ghost" type="button">الرجوع للحساب</button>
+          <button id="logoutBtn" class="ghost" type="button">تسجيل الخروج</button>
+        </div>
+      </div>
+
+      <div class="service-grid">
+        <button class="service-btn" type="button" data-topic="hormones">
+          <div class="meta">
+            <strong>ملخص الهرمونات</strong>
+            <span>دخول إلى صفحة الملخص الخاصة بالهرمونات</span>
+          </div>
+          <div class="price">50 كوينز</div>
+        </button>
+
+        <button class="service-btn" type="button" data-topic="immunity">
+          <div class="meta">
+            <strong>ملخص المناعة</strong>
+            <span>دخول إلى صفحة الملخص الخاصة بالمناعة</span>
+          </div>
+          <div class="price">50 كوينز</div>
+        </button>
+
+        <button class="service-btn" type="button" data-topic="support">
+          <div class="meta">
+            <strong>ملخص دعامة وحركة</strong>
+            <span>دخول إلى صفحة الملخص الخاصة بالدعامة والحركة</span>
+          </div>
+          <div class="price">50 كوينز</div>
+        </button>
+      </div>
+
+      <div id="summaryPanel" class="summary-panel hidden"></div>
+      <div id="dashboardMessage" class="msg"></div>
     </section>
   </main>
 
@@ -184,12 +392,28 @@
       const ageEl = document.getElementById("age");
       const genderEl = document.getElementById("gender");
 
+      const dashboardCard = document.getElementById("dashboardCard");
+      const dashboardMessage = document.getElementById("dashboardMessage");
+      const summaryPanel = document.getElementById("summaryPanel");
+      const coinsCount = document.getElementById("coinsCount");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const backToAuthBtn = document.getElementById("backToAuthBtn");
+      const serviceButtons = Array.from(document.querySelectorAll(".service-btn"));
+
       let mode = "login";
       let app, auth, db;
+      let currentUser = null;
+      let currentCoins = 0;
+      let currentProfileRef = null;
 
       function showMessage(text, type = "") {
         messageEl.textContent = text || "";
         messageEl.className = "msg " + type;
+      }
+
+      function showDashboardMessage(text, type = "") {
+        dashboardMessage.textContent = text || "";
+        dashboardMessage.className = "msg " + type;
       }
 
       function setLoading(isLoading) {
@@ -212,7 +436,6 @@
 
         submitBtn.textContent = isRegister ? "إنشاء حساب" : "تسجيل الدخول";
         showMessage("");
-
         if (isRegister) {
           setTimeout(() => nameEl.focus(), 0);
         } else {
@@ -222,6 +445,80 @@
 
       function saveLocalProfile(profile) {
         localStorage.setItem("userProfile", JSON.stringify(profile));
+      }
+
+      function loadLocalProfile() {
+        try {
+          const raw = localStorage.getItem("userProfile");
+          return raw ? JSON.parse(raw) : null;
+        } catch {
+          return null;
+        }
+      }
+
+      function setCoins(value) {
+        currentCoins = Math.max(0, Number(value) || 0);
+        coinsCount.textContent = currentCoins.toString();
+      }
+
+      function renderSummary(topic) {
+        const map = {
+          hormones: {
+            title: "ملخص الهرمونات",
+            text: "ملخص سريع ومفيد عن الهرمونات مع أهم النقاط التي تحتاجها للمراجعة.",
+            points: [
+              "ما هي الهرمونات ووظيفتها الأساسية.",
+              "أهم الغدد الصماء في جسم الإنسان.",
+              "فرق الهرمونات بين التنظيم والتأثير.",
+              "مراجعة سريعة قبل الاختبار."
+            ]
+          },
+          immunity: {
+            title: "ملخص المناعة",
+            text: "مراجعة مرتبة لأهم مفاهيم المناعة في صورة سهلة الفهم.",
+            points: [
+              "أنواع المناعة الطبيعية والمكتسبة.",
+              "دور كريات الدم البيضاء والأجسام المضادة.",
+              "كيف يحمي الجسم نفسه من الميكروبات.",
+              "نقاط مهمة للحفظ السريع."
+            ]
+          },
+          support: {
+            title: "ملخص الدعامة والحركة",
+            text: "ملخص شامل لأهم الأفكار المرتبطة بالدعامة والحركة في الجسم.",
+            points: [
+              "مكونات الجهاز الهيكلي.",
+              "وظيفة العضلات والمفاصل.",
+              "كيف تحدث الحركة في الجسم.",
+              "أسئلة مراجعة متوقعة."
+            ]
+          }
+        };
+
+        const item = map[topic];
+        if (!item) return;
+
+        summaryPanel.innerHTML = `
+          <h3>${item.title}</h3>
+          <p>${item.text}</p>
+          <ul>
+            ${item.points.map(p => `<li>${p}</li>`).join("")}
+          </ul>
+          <div class="small">تم خصم 50 كوينز للوصول إلى هذا الملخص.</div>
+        `;
+        summaryPanel.classList.remove("hidden");
+      }
+
+      function showDashboard() {
+        dashboardCard.classList.remove("hidden");
+        dashboardCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function hideDashboard() {
+        dashboardCard.classList.add("hidden");
+        summaryPanel.classList.add("hidden");
+        summaryPanel.innerHTML = "";
+        showDashboardMessage("");
       }
 
       async function registerUser() {
@@ -248,11 +545,16 @@
           lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
-        await db.collection("users").doc(cred.user.uid).set(profile, { merge: true });
-        saveLocalProfile(profile);
+        const ref = db.collection("users").doc(cred.user.uid);
+        await ref.set(profile, { merge: true });
 
-        showMessage("تم إنشاء الحساب بنجاح،   ...", "ok");
-        setTimeout(() => window.location.href = "p2.html", 800);
+        currentUser = cred.user;
+        currentProfileRef = ref;
+        setCoins(100);
+        saveLocalProfile({ ...profile, coins: 100 });
+
+        showMessage("تم إنشاء الحساب بنجاح.", "ok");
+        showDashboard();
       }
 
       async function loginUser() {
@@ -270,31 +572,100 @@
         let profile;
         if (snap.exists) {
           profile = snap.data() || {};
-          await ref.set({
-            lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
-          }, { merge: true });
+          await ref.set(
+            { lastLoginAt: firebase.firestore.FieldValue.serverTimestamp() },
+            { merge: true }
+          );
         } else {
           profile = { uid: cred.user.uid, email: mail, coins: 0 };
-          await ref.set({
-            uid: cred.user.uid,
-            email: mail,
-            coins: 0,
-            lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
-          }, { merge: true });
+          await ref.set(
+            {
+              uid: cred.user.uid,
+              email: mail,
+              coins: 0,
+              lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
+            },
+            { merge: true }
+          );
         }
 
-        saveLocalProfile(profile);
-        showMessage("تم تسجيل الدخول بنجاح،   ...", "ok");
-        setTimeout(() => window.location.href = "p2.html", 700);
+        currentUser = cred.user;
+        currentProfileRef = ref;
+        setCoins(profile.coins ?? 0);
+        saveLocalProfile({ ...profile, uid: cred.user.uid, email: mail, coins: profile.coins ?? 0 });
+
+        showMessage("تم تسجيل الدخول بنجاح.", "ok");
+        showDashboard();
+      }
+
+      async function deductCoins(amount) {
+        if (!currentProfileRef) throw new Error("لا يوجد ملف مستخدم مفتوح.");
+        await currentProfileRef.set(
+          { coins: firebase.firestore.FieldValue.increment(-amount) },
+          { merge: true }
+        );
+        setCoins(currentCoins - amount);
+
+        const cached = loadLocalProfile() || {};
+        saveLocalProfile({ ...cached, coins: currentCoins });
       }
 
       loginTab.addEventListener("click", () => setMode("login"));
       registerTab.addEventListener("click", () => setMode("register"));
 
+      serviceButtons.forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          try {
+            const topic = btn.dataset.topic;
+            const price = 50;
+
+            if (!currentUser) {
+              showDashboardMessage("سجّل الدخول أولاً.", "err");
+              return;
+            }
+
+            if (currentCoins < price) {
+              showDashboardMessage("رصيدك لا يكفي لفتح هذا الملخص.", "err");
+              return;
+            }
+
+            await deductCoins(price);
+            renderSummary(topic);
+            showDashboardMessage("تم فتح الملخص وخصم 50 كوينز.", "ok");
+          } catch (err) {
+            showDashboardMessage(err?.message || "حدث خطأ غير متوقع.", "err");
+            console.error(err);
+          }
+        });
+      });
+
+      logoutBtn.addEventListener("click", async () => {
+        try {
+          if (auth) await auth.signOut();
+        } catch (err) {
+          console.error(err);
+        } finally {
+          currentUser = null;
+          currentProfileRef = null;
+          setCoins(0);
+          localStorage.removeItem("userProfile");
+          hideDashboard();
+          showMessage("تم تسجيل الخروج.", "ok");
+          setMode("login");
+          authForm.reset();
+        }
+      });
+
+      backToAuthBtn.addEventListener("click", () => {
+        hideDashboard();
+        showMessage("يمكنك العودة لتسجيل الدخول أو إنشاء حساب.", "");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
       authForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         try {
-          if (!app) throw new Error("  .      جاري التحميل.");
+          if (!app) throw new Error("Firebase لم يكتمل تحميله بعد.");
           setLoading(true);
           showMessage("");
 
@@ -311,7 +682,7 @@
           if (err?.code === "auth/user-not-found") msg = "الحساب غير موجود.";
           if (err?.code === "auth/wrong-password") msg = "كلمة المرور غير صحيحة.";
           if (err?.code === "permission-denied") msg = "Firestore Rules تمنع الكتابة. عدّل القواعد.";
-          if (location.protocol === "file:") msg = "    /    ";
+          if (location.protocol === "file:") msg = "افتح الملف عبر Live Server بدل file://";
           showMessage(msg, "err");
           console.error(err);
         } finally {
@@ -321,12 +692,19 @@
 
       try {
         if (location.protocol === "file:") {
-          showMessage("    /     "err");
+          showMessage("يفضل تشغيل الملف عبر Live Server بدل file://", "err");
         }
+
         app = firebase.initializeApp(firebaseConfig);
         auth = firebase.auth();
         db = firebase.firestore();
         auth.useDeviceLanguage();
+
+        const cachedProfile = loadLocalProfile();
+        if (cachedProfile) {
+          setCoins(cachedProfile.coins ?? 0);
+        }
+
         setMode("login");
       } catch (err) {
         showMessage("فشل تشغيل Firebase: " + (err?.message || "خطأ غير معروف"), "err");
